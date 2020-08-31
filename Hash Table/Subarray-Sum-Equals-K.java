@@ -1,3 +1,5 @@
+https://leetcode.com/problems/subarray-sum-equals-k/
+
 public class Solution {
     public int subarraySum(int[] nums, int k) {
         int cummSum = 0, result = 0;
