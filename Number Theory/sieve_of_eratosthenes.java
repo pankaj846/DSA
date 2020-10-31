@@ -1,4 +1,4 @@
-//print prime numbers in O(n) time
+//print prime numbers in O(NloglogN) time
 
 public void printPrimes(int n) {
         boolean isPrime[] = new boolean[n+1];
