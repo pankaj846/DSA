@@ -33,7 +33,6 @@ import java.util.*;
 		System.out.println("gcd: " + ans.gcd);
 		System.out.println("x: " + ans.x);
 		System.out.println("y: " + ans.y);
-
 	}
 
 }
