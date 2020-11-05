@@ -14,33 +14,39 @@ class Solution {
     
     public boolean KMP(String S, String pattern){
        int patternLen = pattern.length();
-	   int reset[] = new int[patternLen+1];
-	   Arrays.fill(reset, -1);
-	   
-        // create reset table (watch coding block video)
-	   int i=0, j=-1;
-	   while(i<patternLen) {
-		   while(j>=0 && pattern.charAt(i)!=pattern.charAt(j)) {
-			   j=reset[j];
+        
+       // create longest prefix suffix 
+	   int lps[] = new int[patternLen+1];
+	   int j=0;
+	   for(int i=1; i<patternLen; i++) {
+		   while(j>0 && pattern.charAt(i)!=pattern.charAt(j)) {
+			   j=lps[j-1];
 		   }
 		   
-		   i++;
-		   j++;
-		   reset[i]=j;	  
+		   if(pattern.charAt(i)==pattern.charAt(j)) 
+			   j++;
+			   
+		   lps[i]=j;	  
 	   }
-
 	   
-	    i=0; j=0;
+	   
+	   int i=0; j=0;
 	   while(i<S.length()) {
-		   while(j>=0 && S.charAt(i)!=pattern.charAt(j)) {
-			   j=reset[j];
+		   if(S.charAt(i)==pattern.charAt(j)) {
+			   i++; j++;
 		   }
-		   i++;
-		   j++;
+		   
 		   if(j==patternLen) {
-			  return true;
+			   return true;
+			   // j=lps[j-1];
 		   }
-		  
+		   
+		   else if(i<S.length() && S.charAt(i)!=pattern.charAt(j)) {
+			   if(j!=0) 
+				   j=lps[j-1];
+			   else 
+				   i++;
+		   }   
 	   }
         
         return false;
