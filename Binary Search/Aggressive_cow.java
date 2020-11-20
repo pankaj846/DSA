@@ -26,7 +26,6 @@ public class Aggressive_cow {
 		return false;
 	}
 	
-
 	private static int binarySearch(int arr[], int cow ) {
 		Arrays.sort(arr);
 		int n = arr.length;
