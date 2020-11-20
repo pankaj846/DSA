@@ -4,7 +4,7 @@ class Solution {
     
     // can eat all piles in H hour with speed k
     private boolean isValid(int piles[], int k, int H){
-        int hours=0;
+        int hours=0; // hours to eat all piles
         for(int pile : piles){
             hours += pile/k;
             if(pile%k!=0) hours++;
