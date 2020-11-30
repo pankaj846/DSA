@@ -1,30 +1,23 @@
-https://leetcode.com/problems/longest-increasing-subsequence/
+https://practice.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1#
 
-class Solution {
-    public int lengthOfLIS(int[] nums) {
-        int memo[][] = new int[nums.length][nums.length];
-        return LIS(nums, -1, 0, memo);
-    }
-    
-    public int LIS(int arr[], int prev, int curr, int memo[][]){
-        if(curr==arr.length)
-            return 0;
-        
-        if(prev!=-1 && memo[prev][curr]>0)
-            return memo[prev][curr];
-        
-          int ans1=0;
-          if( prev==-1 || arr[prev]<arr[curr])
-             ans1 = 1 + LIS(arr, curr, curr+1, memo);
-           
-             int ans2 = LIS(arr, prev, curr+1, memo);
-            
-            if(prev!=-1)
-            memo[prev][curr]=Math.max(ans1,ans2);
-        
-            return Math.max(ans1, ans2);
-    }
-    
-    
-}
 
+class Solution { 
+
+    static int longestSubsequence(int size, int a[]){
+        // calculate LIS at each index
+       int dp[] = new int[size];
+       Arrays.fill(dp, 1); // at each index min 1 LIS toh hoga
+       int res =1;
+       
+       for(int i=1; i<size; i++){
+           for(int j=i-1; j>=0; j--){
+               if(a[j]<a[i]){
+               int possibleAns = dp[j]+1;
+               dp[i] = Math.max(possibleAns, dp[i]);
+              }
+              res = Math.max(res, dp[i]);
+           }
+       }
+       return res;
+  }
+ 
