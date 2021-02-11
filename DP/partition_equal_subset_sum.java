@@ -6,34 +6,30 @@ class Solution {
        for(int a: arr)
            sum += a;
         
-        if(sum%2!=0)
+        if(sum%2!=0)  // if sum is odd return false
             return false;
         else
-            return subSetSum(arr, sum/2);
-        
+            return subSetSum(arr, sum/2);        
     }
     
     public boolean subSetSum(int arr[], int sum){
         int n = arr.length;
-        boolean dp[][] = new boolean[n+1][sum+1];
-        for(int i=0; i<=n; i++){
-            for(int j=0; j<=sum; j++)
-                if(j==0)
-                    dp[i][0]=true;
-            
-                else if(i==0)
-                    dp[0][j]=false;
-            
-                else if (arr[i-1]<=j){
-                    boolean op1 = dp[i-1][j-arr[i-1]];
-                    boolean op2 = dp[i-1][j];
-                    dp[i][j] = op1 || op2;
-                }
-               else
-                dp[i][j] =  dp[i-1][j];        
-        }
-    
-        return dp[n][sum];
+        Map<String, Boolean> map = new HashMap<>();        
+        return helper(arr, sum ,0 , n, map);
     }
     
+    private boolean helper(int arr[], int sum, int i, int n, Map<String, Boolean> map){                 
+        
+        if(sum==0) return true; // base case
+        
+        if(i>=n || sum<0) return false;
+        
+        String key = i + "pankaj" + sum;        
+        if(map.containsKey(key)) return map.get(key);
+                   
+        boolean res = helper(arr, sum-arr[i], i+1, n, map) ||  helper(arr, sum, i+1, n, map);
+        
+        map.put(key, res);
+        return res;
+    }        
 }
